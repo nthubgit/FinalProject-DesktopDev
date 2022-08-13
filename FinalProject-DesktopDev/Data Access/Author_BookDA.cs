@@ -27,15 +27,15 @@ namespace FinalProject_DesktopDev.Data_Access
             {
                 if (a.AuthorID == Author_Book.AuthorID && a.ISBNFK == Author_Book.ISBNFK)
                 {
-                    MessageBox.Show("Unexpected behavior, Author ID already exists for this book.");
+                    MessageBox.Show("Unexpected behavior, Author ID is already associated with this book.", "Failed");
                     return 0; //failed
                 }
             }
-                ///check to see if exists - TBA
-                StreamWriter sWriter = new StreamWriter(filePath, true); //true used to append
-                sWriter.WriteLine(Author_Book.AuthorID + "," + Author_Book.ISBNFK);
-                sWriter.Close();
-                return 1; //success
+            StreamWriter sWriter = new StreamWriter(filePath, true); //true used to append
+            sWriter.WriteLine(Author_Book.AuthorID + "," + Author_Book.ISBNFK);
+            sWriter.Close();
+            return 1; //success
+
         }
         public static List<Author_Book> ListAuthor_Books()
         {

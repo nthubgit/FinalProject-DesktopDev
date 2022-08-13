@@ -1,9 +1,11 @@
 ﻿using FinalProject_DesktopDev.Business;
 using FinalProject_DesktopDev.Data_Access;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -39,7 +41,7 @@ namespace FinalProject_DesktopDev.GUI
         private void buttonAddBook_Click(object sender, EventArgs e)
         {
 
-            if (textBoxISBN.Text == "" || textBoxTitle.Text == "" || textBoxUnitPrice.Text == "" || textBoxYearPublished.Text == "" || textBoxQOH.Text == "" || textBoxPublisherID.Text == "" || textBoxPublisherName.Text == "" || textBoxAuthorID.Text == "")
+            if (textBoxISBN.Text == "" || textBoxTitle.Text == "" || textBoxUnitPrice.Text == "" || textBoxYearPublished.Text == "" || textBoxQOH.Text == "" || textBoxPublisherID.Text == "" || textBoxPublisherName.Text == "" || textBoxBookAuthorID.Text == "")
             {
                 MessageBox.Show("Fields have been left blank, please fill before continuing.", "Failed");
             }
@@ -50,7 +52,7 @@ namespace FinalProject_DesktopDev.GUI
                 publisher.Name = textBoxPublisherName.Text;
                 publisher.ISBNFK = textBoxISBN.Text;
                 //filing author_book
-                author_book.AuthorID = Convert.ToInt32(textBoxAuthorID.Text);
+                author_book.AuthorID = Convert.ToInt32(textBoxBookAuthorID.Text);
                 author_book.ISBNFK = textBoxISBN.Text;
                 //filling book
                 book.ISBN = textBoxISBN.Text;
@@ -58,17 +60,33 @@ namespace FinalProject_DesktopDev.GUI
                 book.UnitPrice = Convert.ToInt32(textBoxUnitPrice.Text);
                 book.YearPublished = Convert.ToInt32(textBoxYearPublished.Text);
                 book.QOH = Convert.ToInt32(textBoxQOH.Text);
-                //trying register
-                int result = BookDA.Register(book, publisher, author_book);
-                if (result == 1)
+                //confirming that authorID entered exists (can't add a book for an unregistered author)
+                authors = AuthorDA.ListAuthors();
+                bool flag = false;
+                foreach (Author a in authors)
                 {
-                    MessageBox.Show("Registration complete.");
+                    if (Convert.ToInt32(a.AuthorID) == Convert.ToInt32(textBoxBookAuthorID.Text))
+                    {
+                        flag = true;
+                    }
                 }
-                else
+                if (flag) //authorID exists
+                { 
+                    //trying register
+                    int result = BookDA.Register(book, publisher, author_book);
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Registration complete.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Registration failed.");
+                    }
+                }
+                else //failed
                 {
-                    MessageBox.Show("Registration failed.");
+                    MessageBox.Show("Author ID not found! Please confirm that the author exists.");
                 }
-                
             }
         }
 
@@ -81,10 +99,19 @@ namespace FinalProject_DesktopDev.GUI
 
             var allPrograms = (from b in books
                                join p in publishers on b.ISBN equals p.ISBNFK
-                               select new {ISBN = b.ISBN, Title = b.Title, PublisherName = p.Name, Price = b.UnitPrice, YearPublished = b.YearPublished, QOH = b.YearPublished});
+                               orderby b.Title
+                               select new { ISBN = b.ISBN, Title = b.Title, PublisherName = p.Name, Price = b.UnitPrice, YearPublished = b.YearPublished, QOH = b.QOH });
 
             //var allPrograms = (from element in books
             //                   select element);
+
+
+            //var allPrograms = (from ab in author_books
+            //                   join a in authors on ab.AuthorID equals a.AuthorID
+            //                   join b in books on ab.ISBNFK equals b.ISBN
+            //                   join p in publishers on ab.ISBNFK equals p.ISBNFK
+            //                   orderby a.AuthorID
+            //                   select new { ISBN = b.ISBN, Title = b.Title, PublisherName = p.Name, Price = b.UnitPrice, YearPublished = b.YearPublished, QOH = b.QOH, AuthorID = a.AuthorID, LastName = a.LastName, FirstName = a.FirstName }); ;
 
             dataGridViewResult.DataSource = allPrograms.ToList();
         }
@@ -183,24 +210,30 @@ namespace FinalProject_DesktopDev.GUI
 
         private void buttonListAuthor_Click(object sender, EventArgs e)
         {
-            authors = AuthorDA.ListAuthors();
-
             books = BookDA.ListBooks();
             authors = AuthorDA.ListAuthors();
             author_books = Author_BookDA.ListAuthor_Books();
             publishers = PublisherDA.ListPublishers();
 
-            //var allPrograms = (from b in books
-            //                   join p in publishers on b.ISBN equals p.ISBNFK
-            //                   select new { ISBN = b.ISBN, Title = b.Title, PublisherName = p.Name, Price = b.UnitPrice, YearPublished = b.YearPublished, QOH = b.YearPublished });
-
             var allPrograms = (from ab in author_books
                         join a in authors on ab.AuthorID equals a.AuthorID
                         join b in books on ab.ISBNFK equals b.ISBN
-                        select new { ISBN = b.ISBN, Title = b.Title, LastName = a.LastName, FirstName = a.FirstName });
+                        orderby a.AuthorID ascending
+                        select new { ISBN = b.ISBN, Title = b.Title, AuthorID = a.AuthorID, LastName = a.LastName, FirstName = a.FirstName });
 
             //var allPrograms = (from element in authors
             //                   select element);
+
+            dataGridViewResult.DataSource = allPrograms.ToList();
+
+        }
+
+        private void buttonListAllAuthors_Click(object sender, EventArgs e)
+        {
+            authors = AuthorDA.ListAuthors();
+
+            var allPrograms = (from element in authors
+                               select element);
 
             dataGridViewResult.DataSource = allPrograms.ToList();
         }
@@ -344,5 +377,6 @@ namespace FinalProject_DesktopDev.GUI
             }
 
         }
+
     }
 }

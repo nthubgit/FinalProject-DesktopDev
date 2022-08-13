@@ -24,11 +24,22 @@ namespace FinalProject_DesktopDev.Data_Access
 
                 foreach (Client c in listS)
                 {
-                    if (c.Name == client.Name)
+                    if (c.Name == client.Name || c.PhoneNumber == client.PhoneNumber || c.FaxNumber == client.FaxNumber)
                     {
-                        MessageBox.Show("Duplicate ID, please enter a unique one.");
+                        MessageBox.Show("Duplicate name, phone number, or/and fax number found, please enter unique one(s).", "Failed");
                         dupe = true;
                     }
+                    if (c.PhoneNumber.Length > 14  || c.PhoneNumber.Length < 14 || c.FaxNumber.Length > 14 || c.FaxNumber.Length < 14)
+                    {
+                        MessageBox.Show("Phone/Fax Number must be exactly 14 characters." + "\n" + "Example: (555) 555-5555", "Failed");
+                        dupe = true;
+                    }
+                    if (c.PostalCode.Length != 7)
+                    {
+                        MessageBox.Show("Postal code must be exactly 7 characters." + "\n" + "Example: H3G H20", "Failed");
+                        dupe = true;
+                    }
+
                 }
                 if (dupe == false)
                 {
@@ -273,30 +284,31 @@ namespace FinalProject_DesktopDev.Data_Access
 
             //Update
 
-            StreamWriter sWriter = new StreamWriter(fileTemp, true);
-            StreamReader sReader2 = new StreamReader(filePath);
-            String line2 = sReader2.ReadLine();
 
-            while (line2 != null)
-            {
-                string[] fields = line2.Split(',');
-                if (fields[0] != client.Name)
-                {
-                    sWriter.WriteLine(fields[0] + "," + fields[1] + "," + fields[2] + "," + fields[3] + "," + fields[4] + "," + fields[5] + "," + fields[6]);
-                }
-
-                line2 = sReader2.ReadLine();
-            }
-            sWriter.WriteLine(client.Name + "," + client.Street + "," + client.City + "," + client.PostalCode + "," + client.PhoneNumber + "," + client.FaxNumber + "," + client.CreditLimit);
-            sReader2.Close();
-            sWriter.Close();
-            File.Delete(filePath);
-            File.Move(fileTemp, filePath);
             string result = BookDA.Transaction(BookTitle, QOH);
 
             if (result != null)
             {
-                result += client.Name + "'s credit: " + oldCredit + "=>" + client.CreditLimit;
+                StreamWriter sWriter = new StreamWriter(fileTemp, true);
+                StreamReader sReader2 = new StreamReader(filePath);
+                String line2 = sReader2.ReadLine();
+
+                while (line2 != null)
+                {
+                    string[] fields = line2.Split(',');
+                    if (fields[0] != client.Name)
+                    {
+                        sWriter.WriteLine(fields[0] + "," + fields[1] + "," + fields[2] + "," + fields[3] + "," + fields[4] + "," + fields[5] + "," + fields[6]);
+                    }
+
+                    line2 = sReader2.ReadLine();
+                }
+                sWriter.WriteLine(client.Name + "," + client.Street + "," + client.City + "," + client.PostalCode + "," + client.PhoneNumber + "," + client.FaxNumber + "," + (client.CreditLimit - totalPrice));
+                sReader2.Close();
+                sWriter.Close();
+                File.Delete(filePath);
+                File.Move(fileTemp, filePath);
+                result += client.Name + "'s credit: " + oldCredit + "=>" + budgetCheck;
                 return result;
             }
             return result;
@@ -339,7 +351,7 @@ namespace FinalProject_DesktopDev.Data_Access
                 string[] fields = line2.Split(',');
                 if (fields[0] != client.Name)
                 {
-                    sWriter.WriteLine(fields[0] + "," + fields[1] + "," + fields[2] + "," + fields[3] + "," + fields[4] + "," + fields[5] + "," + fields[6]);
+                    sWriter.WriteLine(fields[0] + "," + fields[1] + "," + fields[2] + "," + fields[3] + "," + fields[4] + "," + fields[5] + "," + (fields[6]));
                 }
 
                 line2 = sReader2.ReadLine();

@@ -47,6 +47,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxYearPublished = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxBookAuthorID = new System.Windows.Forms.TextBox();
+            this.labelBookAuthorID = new System.Windows.Forms.Label();
+            this.buttonListPublisher = new System.Windows.Forms.Button();
             this.textBoxPublisherName = new System.Windows.Forms.TextBox();
             this.labelPublisherName = new System.Windows.Forms.Label();
             this.textBoxPublisherID = new System.Windows.Forms.TextBox();
@@ -68,9 +71,7 @@
             this.textBoxAuthorID = new System.Windows.Forms.TextBox();
             this.buttonAdd2 = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
-            this.buttonListPublisher = new System.Windows.Forms.Button();
-            this.textBoxBookAuthorID = new System.Windows.Forms.TextBox();
-            this.labelBookAuthorID = new System.Windows.Forms.Label();
+            this.buttonListAllAuthors = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -199,7 +200,7 @@
             this.dataGridViewResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewResult.Location = new System.Drawing.Point(19, 30);
             this.dataGridViewResult.Name = "dataGridViewResult";
-            this.dataGridViewResult.Size = new System.Drawing.Size(462, 391);
+            this.dataGridViewResult.Size = new System.Drawing.Size(462, 517);
             this.dataGridViewResult.TabIndex = 29;
             // 
             // buttonAdd
@@ -277,6 +278,34 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Book";
             // 
+            // textBoxBookAuthorID
+            // 
+            this.textBoxBookAuthorID.Location = new System.Drawing.Point(125, 292);
+            this.textBoxBookAuthorID.Name = "textBoxBookAuthorID";
+            this.textBoxBookAuthorID.Size = new System.Drawing.Size(121, 20);
+            this.textBoxBookAuthorID.TabIndex = 49;
+            this.textBoxBookAuthorID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBookAuthorID_KeyPress);
+            // 
+            // labelBookAuthorID
+            // 
+            this.labelBookAuthorID.AutoSize = true;
+            this.labelBookAuthorID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.labelBookAuthorID.Location = new System.Drawing.Point(27, 296);
+            this.labelBookAuthorID.Name = "labelBookAuthorID";
+            this.labelBookAuthorID.Size = new System.Drawing.Size(65, 13);
+            this.labelBookAuthorID.TabIndex = 50;
+            this.labelBookAuthorID.Text = "Author ID:";
+            // 
+            // buttonListPublisher
+            // 
+            this.buttonListPublisher.Location = new System.Drawing.Point(154, 491);
+            this.buttonListPublisher.Name = "buttonListPublisher";
+            this.buttonListPublisher.Size = new System.Drawing.Size(125, 23);
+            this.buttonListPublisher.TabIndex = 43;
+            this.buttonListPublisher.Text = "List &Publishers";
+            this.buttonListPublisher.UseVisualStyleBackColor = true;
+            this.buttonListPublisher.Click += new System.EventHandler(this.buttonListPublisher_Click);
+            // 
             // textBoxPublisherName
             // 
             this.textBoxPublisherName.Location = new System.Drawing.Point(125, 253);
@@ -314,6 +343,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.buttonListAllAuthors);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.textBoxEmail);
             this.groupBox3.Controls.Add(this.textBoxLastName);
@@ -327,7 +357,7 @@
             this.groupBox3.Controls.Add(this.buttonAdd2);
             this.groupBox3.Location = new System.Drawing.Point(819, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(285, 365);
+            this.groupBox3.Size = new System.Drawing.Size(285, 529);
             this.groupBox3.TabIndex = 42;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Author";
@@ -411,11 +441,11 @@
             // 
             // buttonList2
             // 
-            this.buttonList2.Location = new System.Drawing.Point(204, 332);
+            this.buttonList2.Location = new System.Drawing.Point(8, 373);
             this.buttonList2.Name = "buttonList2";
-            this.buttonList2.Size = new System.Drawing.Size(75, 23);
+            this.buttonList2.Size = new System.Drawing.Size(271, 23);
             this.buttonList2.TabIndex = 32;
-            this.buttonList2.Text = "&List";
+            this.buttonList2.Text = "&List Authors w/ Books";
             this.buttonList2.UseVisualStyleBackColor = true;
             this.buttonList2.Click += new System.EventHandler(this.buttonListAuthor_Click);
             // 
@@ -466,11 +496,11 @@
             // 
             // buttonAdd2
             // 
-            this.buttonAdd2.Location = new System.Drawing.Point(17, 332);
+            this.buttonAdd2.Location = new System.Drawing.Point(8, 332);
             this.buttonAdd2.Name = "buttonAdd2";
-            this.buttonAdd2.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd2.Size = new System.Drawing.Size(271, 23);
             this.buttonAdd2.TabIndex = 31;
-            this.buttonAdd2.Text = "&Add";
+            this.buttonAdd2.Text = "&Add Author";
             this.buttonAdd2.UseVisualStyleBackColor = true;
             this.buttonAdd2.Click += new System.EventHandler(this.buttonAddAuthor_Click);
             // 
@@ -486,33 +516,15 @@
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
-            // buttonListPublisher
+            // buttonListAllAuthors
             // 
-            this.buttonListPublisher.Location = new System.Drawing.Point(154, 491);
-            this.buttonListPublisher.Name = "buttonListPublisher";
-            this.buttonListPublisher.Size = new System.Drawing.Size(125, 23);
-            this.buttonListPublisher.TabIndex = 43;
-            this.buttonListPublisher.Text = "List &Publishers";
-            this.buttonListPublisher.UseVisualStyleBackColor = true;
-            this.buttonListPublisher.Click += new System.EventHandler(this.buttonListPublisher_Click);
-            // 
-            // textBoxBookAuthorID
-            // 
-            this.textBoxBookAuthorID.Location = new System.Drawing.Point(125, 292);
-            this.textBoxBookAuthorID.Name = "textBoxBookAuthorID";
-            this.textBoxBookAuthorID.Size = new System.Drawing.Size(121, 20);
-            this.textBoxBookAuthorID.TabIndex = 49;
-            this.textBoxBookAuthorID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBookAuthorID_KeyPress);
-            // 
-            // labelBookAuthorID
-            // 
-            this.labelBookAuthorID.AutoSize = true;
-            this.labelBookAuthorID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.labelBookAuthorID.Location = new System.Drawing.Point(27, 296);
-            this.labelBookAuthorID.Name = "labelBookAuthorID";
-            this.labelBookAuthorID.Size = new System.Drawing.Size(65, 13);
-            this.labelBookAuthorID.TabIndex = 50;
-            this.labelBookAuthorID.Text = "Author ID:";
+            this.buttonListAllAuthors.Location = new System.Drawing.Point(8, 415);
+            this.buttonListAllAuthors.Name = "buttonListAllAuthors";
+            this.buttonListAllAuthors.Size = new System.Drawing.Size(271, 23);
+            this.buttonListAllAuthors.TabIndex = 40;
+            this.buttonListAllAuthors.Text = "&List All Authors";
+            this.buttonListAllAuthors.UseVisualStyleBackColor = true;
+            this.buttonListAllAuthors.Click += new System.EventHandler(this.buttonListAllAuthors_Click);
             // 
             // FormInventoryManagement
             // 
@@ -585,5 +597,6 @@
         private System.Windows.Forms.Label labelPublisherID;
         private System.Windows.Forms.TextBox textBoxBookAuthorID;
         private System.Windows.Forms.Label labelBookAuthorID;
+        private System.Windows.Forms.Button buttonListAllAuthors;
     }
 }

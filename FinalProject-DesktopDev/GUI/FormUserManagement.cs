@@ -78,18 +78,28 @@ namespace FinalProject_DesktopDev.GUI
                         }
                     case 1: //Role (0,1,2,3)
                         {
-                            users = UserDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
+                            int numericValue;
+                            bool isNumber = int.TryParse(textBoxSearch.Text, out numericValue);
 
-                            if (users != null)
+                            if (isNumber == true)
                             {
-                                var results = (from element in users
-                                               select element);
+                                users = UserDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
 
-                                dataGridViewResult.DataSource = results.ToList();
+                                if (users != null)
+                                {
+                                    var results = (from element in users
+                                                   select element);
+
+                                    dataGridViewResult.DataSource = results.ToList();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("User not found!");
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("User not found!");
+                                MessageBox.Show("Query must be a number for this criteria!", "Failed");
                             }
                             break;
                         }
@@ -107,6 +117,11 @@ namespace FinalProject_DesktopDev.GUI
                                select element);
 
             dataGridViewResult.DataSource = allPrograms.ToList();
+
+        }
+
+        private void FormUserManagement_Load(object sender, EventArgs e)
+        {
 
         }
     }

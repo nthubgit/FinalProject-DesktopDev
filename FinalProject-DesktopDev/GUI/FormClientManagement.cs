@@ -95,18 +95,28 @@ namespace FinalProject_DesktopDev.GUI
                         }
                     case 6: //Credit Limit
                         {
-                            clients = ClientDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
+                            int numericValue;
+                            bool isNumber = int.TryParse(textBoxSearch.Text, out numericValue);
 
-                            if (clients != null)
+                            if (isNumber == true)
                             {
-                                var results = (from element in clients
-                                               select element);
+                                clients = ClientDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
 
-                                dataGridViewResult.DataSource = results.ToList();
+                                if (clients != null)
+                                {
+                                    var results = (from element in clients
+                                                   select element);
+
+                                    dataGridViewResult.DataSource = results.ToList();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Client not found!");
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Client not found!");
+                                MessageBox.Show("Query must be a number for this criteria!", "Failed");
                             }
                             break;
                         }

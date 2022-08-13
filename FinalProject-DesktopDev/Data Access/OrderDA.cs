@@ -39,8 +39,8 @@ namespace FinalProject_DesktopDev.Data_Access
                 StreamWriter sWriter = new StreamWriter(filePath, true); //true used to append
                 sWriter.WriteLine(order.OrderID + "," + order.ClientName + "," + order.BookTitle + "," + order.Quantity + "," + order.TotalPrice); ;
                 sWriter.Close();
-                    MessageBox.Show("Transaction complete!" + "/n" +
-                        result);
+                MessageBox.Show("Transaction complete!" + "\n" +
+                    result);
                 }
 
 

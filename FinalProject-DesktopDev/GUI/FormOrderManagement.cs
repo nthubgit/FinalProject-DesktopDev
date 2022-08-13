@@ -75,7 +75,7 @@ namespace FinalProject_DesktopDev.GUI
                 order.ClientName = textBoxClientName.Text;
                 order.BookTitle = comboBoxBook.Text;
                 order.Quantity = Convert.ToInt32(textBoxQuantity.Text);
-                order.TotalPrice = Convert.ToInt32(textBoxPrice.Text);
+                order.TotalPrice = Convert.ToInt32(textBoxPrice.Text) * order.Quantity;
                 OrderDA.Register(order);
             }
         }
@@ -166,6 +166,10 @@ namespace FinalProject_DesktopDev.GUI
             {
                 MessageBox.Show("Missing query.", "Failed");
 
+            }
+            else if (textBoxQuery.Text.Length != 14)
+            {
+                MessageBox.Show("Phone/Fax Number must be exactly 14 characters." + "\n" + "Example: (555) 555-5555", "Failed");
             }
             else
             {

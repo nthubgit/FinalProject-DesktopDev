@@ -230,8 +230,6 @@ namespace FinalProject_DesktopDev.Data_Access
             }
             sReader.Close();
             //Check to see there are enough books before completing transaction
-            MessageBox.Show(oldQOH.ToString());
-            MessageBox.Show(Quantity.ToString());
             int quantityCheck = oldQOH - Quantity;
             if (quantityCheck < 0)
             {
@@ -254,12 +252,12 @@ namespace FinalProject_DesktopDev.Data_Access
 
                 line2 = sReader2.ReadLine();
             }
-            sWriter.WriteLine(book.ISBN + "," + book.Title + "," + book.UnitPrice + "," + book.YearPublished + "," + book.QOH);
+            sWriter.WriteLine(book.ISBN + "," + book.Title + "," + book.UnitPrice + "," + book.YearPublished + "," + (book.QOH - Quantity));
             sReader2.Close();
             sWriter.Close();
             File.Delete(filePath);
             File.Move(fileTemp, filePath);
-            string result = book.Title + " QOH: " + oldQOH + "=>" + book.QOH + "\n";
+            string result = book.Title + " QOH: " + oldQOH + "=>" + quantityCheck + "\n";
             return result;
         }
         public static void ReverseTransaction(string BookTitle, int Quantity) //Finds the book based on BookTitle, then updates DB

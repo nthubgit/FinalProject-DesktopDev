@@ -92,5 +92,10 @@ namespace FinalProject_DesktopDev.GUI
                 }
             }
         }
+
+        private void FormEmployeeManagement_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
