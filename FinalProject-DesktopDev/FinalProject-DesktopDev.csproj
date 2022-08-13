@@ -46,8 +46,85 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Author.cs" />
+    <Compile Include="Business\Book.cs" />
+    <Compile Include="Business\Client.cs" />
+    <Compile Include="Business\Employee.cs" />
+    <Compile Include="Business\Order.cs" />
+    <Compile Include="Business\Publisher.cs" />
+    <Compile Include="Business\User.cs" />
+    <Compile Include="Data Access\AuthorDA.cs" />
+    <Compile Include="Data Access\BookDA.cs" />
+    <Compile Include="Data Access\ClientDA.cs" />
+    <Compile Include="Data Access\EmployeeDA.cs" />
+    <Compile Include="Data Access\OrderDA.cs" />
+    <Compile Include="Data Access\PublisherDA.cs" />
+    <Compile Include="Data Access\UserDA.cs" />
+    <Compile Include="GUI\FormClientManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormClientManagement.Designer.cs">
+      <DependentUpon>FormClientManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormEmployeeManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormEmployeeManagement.Designer.cs">
+      <DependentUpon>FormEmployeeManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormInventoryManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormInventoryManagement.Designer.cs">
+      <DependentUpon>FormInventoryManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormMainMenu.Designer.cs">
+      <DependentUpon>FormMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormOrderManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormOrderManagement.Designer.cs">
+      <DependentUpon>FormOrderManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormUserManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormUserManagement.Designer.cs">
+      <DependentUpon>FormUserManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\FormClientManagement.resx">
+      <DependentUpon>FormClientManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormEmployeeManagement.resx">
+      <DependentUpon>FormEmployeeManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormInventoryManagement.resx">
+      <DependentUpon>FormInventoryManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormMainMenu.resx">
+      <DependentUpon>FormMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormOrderManagement.resx">
+      <DependentUpon>FormOrderManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormUserManagement.resx">
+      <DependentUpon>FormUserManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -70,10 +147,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\" />
-    <Folder Include="Data Access\" />
-    <Folder Include="GUI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

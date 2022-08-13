@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FinalProject_DesktopDev.GUI;
 
 namespace FinalProject_DesktopDev
 {
@@ -16,7 +17,7 @@ namespace FinalProject_DesktopDev
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormLogin());
         }
     }
 }
