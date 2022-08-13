@@ -20,6 +20,12 @@ namespace FinalProject_DesktopDev.GUI
         List<Author> authors = new List<Author>();
         Author author = new Author();
 
+        List<Publisher> publishers = new List<Publisher>();
+        Publisher publisher = new Publisher();
+
+        List<Author_Book> author_books = new List<Author_Book>();
+        Author_Book author_book = new Author_Book();
+
         public FormInventoryManagement()
         {
             InitializeComponent();
@@ -51,8 +57,16 @@ namespace FinalProject_DesktopDev.GUI
         private void buttonListBook_Click(object sender, EventArgs e)
         {
             books = BookDA.ListBooks();
-            var allPrograms = (from element in books
-                               select element);
+            authors = AuthorDA.ListAuthors();
+            author_books = Author_BookDA.ListAuthor_Books();
+            publishers = PublisherDA.ListPublishers();
+
+            var allPrograms = (from b in books
+                               join p in publishers on b.ISBN equals p.ISBNFK
+                               select new {ISBN = b.ISBN, Title = b.Title, PublisherName = p.Name, Price = b.UnitPrice, YearPublished = b.YearPublished, QOH = b.YearPublished});
+
+            //var allPrograms = (from element in books
+            //                   select element);
 
             dataGridViewResult.DataSource = allPrograms.ToList();
         }
@@ -207,6 +221,29 @@ namespace FinalProject_DesktopDev.GUI
                 }
             }
         }
+        //-------------------------------------------Publishers--------------------------------------------//
+        private void buttonAddPublisher_Click(object sender, EventArgs e)
+        {
+            if (textBoxPublisherID.Text == "" || textBoxPublisherName.Text == "" ||textBoxISBNFK.Text == "")
+            {
+                MessageBox.Show("Fields have been left blank, please fill before continuing.", "Failed");
+            }
+            else
+            {
+                publisher.PublisherID = Convert.ToInt32(textBoxPublisherID.Text);
+                publisher.Name = textBoxPublisherName.Text;
+                PublisherDA.Register(publisher);
+            }
+        }
+
+        private void buttonListPublisher_Click(object sender, EventArgs e)
+        {
+            publishers = PublisherDA.ListPublishers();
+            var allPrograms = (from element in publishers
+                               select element);
+
+            dataGridViewResult.DataSource = allPrograms.ToList();
+        }
         //-------------------------------------------Validations------------------------------------------//
         private void textBoxUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -236,6 +273,24 @@ namespace FinalProject_DesktopDev.GUI
         }
 
         private void textBoxAuthorID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxPublisherID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxPublisherIDFK_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verify that the pressed key isn't CTRL or any non-numeric digit
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.labelSearchBy = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
@@ -54,7 +55,6 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelOrderID = new System.Windows.Forms.Label();
             this.textBoxOrderID = new System.Windows.Forms.TextBox();
-            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).BeginInit();
             this.groupBoxFindClient.SuspendLayout();
@@ -72,6 +72,21 @@
             this.groupBox1.Size = new System.Drawing.Size(432, 106);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
+            // 
+            // comboBoxSearch
+            // 
+            this.comboBoxSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSearch.FormattingEnabled = true;
+            this.comboBoxSearch.Items.AddRange(new object[] {
+            "Order ID",
+            "Client",
+            "Book",
+            "Price",
+            "Quantity"});
+            this.comboBoxSearch.Location = new System.Drawing.Point(117, 22);
+            this.comboBoxSearch.Name = "comboBoxSearch";
+            this.comboBoxSearch.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxSearch.TabIndex = 36;
             // 
             // textBoxSearch
             // 
@@ -326,21 +341,6 @@
             this.textBoxOrderID.TabIndex = 33;
             this.textBoxOrderID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxOrderID_KeyPress);
             // 
-            // comboBoxSearch
-            // 
-            this.comboBoxSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSearch.FormattingEnabled = true;
-            this.comboBoxSearch.Items.AddRange(new object[] {
-            "Order ID",
-            "Client",
-            "Book",
-            "Price",
-            "Quantity"});
-            this.comboBoxSearch.Location = new System.Drawing.Point(117, 22);
-            this.comboBoxSearch.Name = "comboBoxSearch";
-            this.comboBoxSearch.Size = new System.Drawing.Size(292, 21);
-            this.comboBoxSearch.TabIndex = 36;
-            // 
             // FormOrderManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -354,7 +354,7 @@
             this.Controls.Add(this.dataGridViewResult);
             this.Name = "FormOrderManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormOrderManagement";
+            this.Text = "Order Management";
             this.Load += new System.EventHandler(this.FormOrderManagement_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

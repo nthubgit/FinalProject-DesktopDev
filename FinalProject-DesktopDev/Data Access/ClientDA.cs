@@ -235,7 +235,7 @@ namespace FinalProject_DesktopDev.Data_Access
             return listS;
         }
 
-        public static void Transaction(string ClientName, int totalPrice) //Finds the client based on ClientName, then updates DB
+        public static String Transaction(string ClientName, int totalPrice, string BookTitle, int QOH) //Finds the client based on ClientName, then updates DB
         {
             StreamReader sReader = new StreamReader(filePath);
             string line = sReader.ReadLine();
@@ -255,12 +255,22 @@ namespace FinalProject_DesktopDev.Data_Access
                     client.PostalCode = fields[3];
                     client.PhoneNumber = fields[4];
                     client.FaxNumber = fields[5];
-                    client.CreditLimit = (Convert.ToInt32(fields[6]) - totalPrice);
+                    client.CreditLimit = (Convert.ToInt32(fields[6]));
                     break;
                 }
                 line = sReader.ReadLine();
             }
             sReader.Close();
+
+            //Check to see client has enough funds before doing transaction
+
+            int budgetCheck = oldCredit - totalPrice; 
+            if (budgetCheck < 0)
+            {
+                MessageBox.Show("Insufficient credit! Cancelling transaction.");
+                return null;
+            }
+
             //Update
 
             StreamWriter sWriter = new StreamWriter(fileTemp, true);
@@ -282,11 +292,17 @@ namespace FinalProject_DesktopDev.Data_Access
             sWriter.Close();
             File.Delete(filePath);
             File.Move(fileTemp, filePath);
-            MessageBox.Show("Transaction complete!" + "\n" +
-                client.Name + "credit: " + oldCredit + "=>" + client.CreditLimit);
+            string result = BookDA.Transaction(BookTitle, QOH);
+
+            if (result != null)
+            {
+                result += client.Name + "'s credit: " + oldCredit + "=>" + client.CreditLimit;
+                return result;
+            }
+            return result;
         }
 
-        public static void ReverseTransaction(string ClientName, int totalPrice) //Finds the client based on ClientName after deletion, then updates DB to revert values. Would be better to include this in Transaction somehow
+        public static String ReverseTransaction(string ClientName, int totalPrice) //Finds the client based on ClientName after deletion, then updates DB to revert values. Would be better to include this in Transaction somehow
         {
             StreamReader sReader = new StreamReader(filePath);
             string line = sReader.ReadLine();
@@ -333,8 +349,8 @@ namespace FinalProject_DesktopDev.Data_Access
             sWriter.Close();
             File.Delete(filePath);
             File.Move(fileTemp, filePath);
-            MessageBox.Show("Reverse transaction complete!" + "\n" +
-                client.Name + "'s credit: " + oldCredit + "=>" + client.CreditLimit);
+            string result = client.Name + "'s credit: " + oldCredit + "=>" + client.CreditLimit;
+            return result;
         }
 
     }

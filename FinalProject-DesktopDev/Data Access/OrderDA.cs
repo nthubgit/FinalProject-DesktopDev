@@ -33,13 +33,18 @@ namespace FinalProject_DesktopDev.Data_Access
 
             if (dupe == false)
             {
-                ///check to see if exists - TBA
+                //Find client based on Client Name, and subtract the cost of the order from their credit limit
+                String result = ClientDA.Transaction(order.ClientName, order.TotalPrice, order.BookTitle, order.Quantity);
+                
+                if (result != null) { 
                 StreamWriter sWriter = new StreamWriter(filePath, true); //true used to append
                 sWriter.WriteLine(order.OrderID + "," + order.ClientName + "," + order.BookTitle + "," + order.Quantity + "," + order.TotalPrice); ;
                 sWriter.Close();
-                //Find client based on Client Name, and subtract the cost of the order from their credit limit
-                ClientDA.Transaction(order.ClientName, order.TotalPrice);
-                BookDA.Transaction(order.BookTitle, order.Quantity);
+                    MessageBox.Show("Transaction complete!" + "/n" +
+                        result);
+                }
+
+
             }
         }
         public static List<Order> Search(int num, int choice) //Search for Order ID, Quantity, TotalPrice

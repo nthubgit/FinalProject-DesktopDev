@@ -200,7 +200,7 @@ namespace FinalProject_DesktopDev.Data_Access
             sReader.Close();
             return listS;
         }
-        public static void Transaction(string BookTitle, int Quantity) //Finds the book based on BookTitle, then updates DB
+        public static String Transaction(string BookTitle, int Quantity) //Finds the book based on BookTitle, then updates DB
         {
             StreamReader sReader = new StreamReader(filePath);
             string line = sReader.ReadLine();
@@ -218,12 +218,21 @@ namespace FinalProject_DesktopDev.Data_Access
                     book.Title = fields[1];
                     book.UnitPrice = (Convert.ToInt32(fields[2]));
                     book.YearPublished = (Convert.ToInt32(fields[3]));
-                    book.QOH = (Convert.ToInt32(fields[4]) - Quantity);
+                    book.QOH = (Convert.ToInt32(fields[4]));
                     break;
                 }
                 line = sReader.ReadLine();
             }
             sReader.Close();
+            //Check to see there are enough books before completing transaction
+            MessageBox.Show(oldQOH.ToString());
+            MessageBox.Show(Quantity.ToString());
+            int quantityCheck = oldQOH - Quantity;
+            if (quantityCheck < 0)
+            {
+                MessageBox.Show("Insufficient QOH! Cancelling transaction.");
+                return null;
+            }
             //Update
 
             StreamWriter sWriter = new StreamWriter(fileTemp, true);
@@ -245,8 +254,8 @@ namespace FinalProject_DesktopDev.Data_Access
             sWriter.Close();
             File.Delete(filePath);
             File.Move(fileTemp, filePath);
-            MessageBox.Show("Transaction complete!" + "\n" +
-                book.Title + " QOH: " + oldQOH + "=>" + book.QOH);
+            string result = book.Title + " QOH: " + oldQOH + "=>" + book.QOH + "\n";
+            return result;
         }
         public static void ReverseTransaction(string BookTitle, int Quantity) //Finds the book based on BookTitle, then updates DB
         {

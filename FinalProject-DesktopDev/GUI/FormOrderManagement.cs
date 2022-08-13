@@ -55,9 +55,11 @@ namespace FinalProject_DesktopDev.GUI
         {
             orders = OrderDA.ListOrders();
             var allPrograms = (from element in orders
+                               orderby element.OrderID ascending
                                select element);
 
             dataGridViewResult.DataSource = allPrograms.ToList();
+            //Consider adding sorting later
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

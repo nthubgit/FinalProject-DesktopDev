@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Author.cs" />
+    <Compile Include="Business\Author_Book.cs" />
     <Compile Include="Business\Book.cs" />
     <Compile Include="Business\Client.cs" />
     <Compile Include="Business\Employee.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Business\Publisher.cs" />
     <Compile Include="Business\User.cs" />
     <Compile Include="Data Access\AuthorDA.cs" />
+    <Compile Include="Data Access\Author_BookDA.cs" />
     <Compile Include="Data Access\BookDA.cs" />
     <Compile Include="Data Access\ClientDA.cs" />
     <Compile Include="Data Access\EmployeeDA.cs" />

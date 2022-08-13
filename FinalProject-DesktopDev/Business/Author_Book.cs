@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject_DesktopDev.Business
 {
-    public class Publisher
+    public class Author_Book
     {
-        public int PublisherID { get; set; }
-        public string Name { get; set; }
+        public int AuthorID { get; set; }
         public string ISBNFK { get; set; }
     }
 }
