@@ -35,7 +35,6 @@ namespace FinalProject_DesktopDev.GUI
 
         private void FormMainMenu_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Welcome " + loggedUser.Username + "!", "Login succeeded");
             var roleAccess = loggedUser.Role;
 
             switch (roleAccess)
@@ -72,6 +71,11 @@ namespace FinalProject_DesktopDev.GUI
                     buttonClientManagement.Enabled = true;
                     buttonInventoryManagement.Enabled = true;
                     buttonOrderManagement.Enabled = true;
+                    buttonUserManagement.BackColor = Color.LightGreen;
+                    buttonEmployeeManagement.BackColor = Color.LightGreen;
+                    buttonClientManagement.BackColor = Color.LightGreen;
+                    buttonInventoryManagement.BackColor = Color.LightGreen;
+                    buttonOrderManagement.BackColor = Color.LightGreen;
                     break;
             }
         }

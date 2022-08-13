@@ -94,50 +94,60 @@ namespace FinalProject_DesktopDev.GUI
                 {
                     case -1: // IF the Book NOT select any search option
 
-                        MessageBox.Show("Please select at least one Search Option");
+                        MessageBox.Show("Please select at least one Search Option", "Failed");
                         break;
 
-                    case 0: //ISBN
-                    case 1: //Title
+                    case 0: //OrderID
+                    case 3: //Quantity
+                    case 4: //TotalPrice
                         {
-                            books = BookDA.Search(textBoxSearch.Text, choice);
+                            int numericValue;
+                            bool isNumber = int.TryParse(textBoxSearch.Text, out numericValue);
 
-                            if (books != null)
+                            if (isNumber == true)
                             {
-                                var results = (from element in books
+                                orders = OrderDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
+                                
+                                if (orders != null)
+                                {
+                                    var results = (from element in orders
+                                                   select element);
+
+                                    dataGridViewResult.DataSource = results.ToList();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Order not found!", "Failed");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Query must be a number for this criteria!", "Failed");
+                            }
+                            break;
+                        }
+
+                    case 1: //ClientName
+                    case 2: //BookTitle
+                        {
+                            orders = OrderDA.Search(textBoxSearch.Text, choice);
+
+                            if (orders != null)
+                            {
+                                var results = (from element in orders
                                                select element);
 
                                 dataGridViewResult.DataSource = results.ToList();
                             }
                             else
                             {
-                                MessageBox.Show("Book not found!");
-                            }
-                            break;
-                        }
-
-                    case 2: //UnitPrice
-                    case 3: //YearPublished
-                    case 4: //QOH
-                        {
-                            books = BookDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
-
-                            if (books != null)
-                            {
-                                var results = (from element in books
-                                               select element);
-
-                                dataGridViewResult.DataSource = results.ToList();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Book not found!");
+                                MessageBox.Show("Order not found!", "Failed");
                             }
                             break;
                         }
 
 
-                    default:   // IF the Book NOT select an option on the  search combo box
+                    default:   // IF the Order NOT select an option on the  search combo box
                         break;
                 }
             }

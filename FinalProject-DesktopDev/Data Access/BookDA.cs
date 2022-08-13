@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,31 +15,35 @@ namespace FinalProject_DesktopDev.Data_Access
         private static string filePath = Application.StartupPath + @"\Books.dat"; //custom path
         private static string fileTemp = Application.StartupPath + @"\Temp.dat"; //custom path for temp dat, used for better updating (replacing)/deleting
 
-        public static void Register(Book book)
+        public static int Register(Book book, Business.Publisher publisher, Author_Book author_book)
         {
 
             List<Book> listS = new List<Book>();
             listS = ListBooks();
-            bool dupe = false;
 
             foreach (Book b in listS)
             {
                 if (b.ISBN == book.ISBN)
                 {
                     MessageBox.Show("Duplicate ISBN, please enter a unique one.");
-                    dupe = true;
+                    return 1;
                 }
             }
-
-            if (dupe == false)
+            int result = PublisherDA.Register(publisher, author_book);
+            if (result == 1)
             {
                 ///check to see if exists - TBA
                 StreamWriter sWriter = new StreamWriter(filePath, true); //true used to append
                 sWriter.WriteLine(book.ISBN + "," + book.Title + "," + book.UnitPrice + "," + book.YearPublished + "," + book.QOH);
                 sWriter.Close();
-                MessageBox.Show("Registration complete.");
+                return 1;
+            }
+            else
+            {
+                return 0; //failed
             }
         }
+        
         public static List<Book> Search(int num, int choice) //Search for UnitPrice, Postal Code, Phone Number, Fax Number
         {
             List<Book> listS = new List<Book>();
@@ -130,7 +135,7 @@ namespace FinalProject_DesktopDev.Data_Access
 
                 switch (choice)
                 {
-                    case 0:
+                    case 0: //ISBN
                         {
                             if (text == fields[0])
                             {
@@ -145,7 +150,7 @@ namespace FinalProject_DesktopDev.Data_Access
                             line = sReader.ReadLine();
                             break;
                         }
-                    case 1:
+                    case 1: //Title
                         {
                             if (text == fields[1])
                             {

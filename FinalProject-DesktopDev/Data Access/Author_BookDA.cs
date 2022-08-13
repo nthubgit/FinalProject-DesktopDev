@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,31 +16,26 @@ namespace FinalProject_DesktopDev.Data_Access
         private static string filePath = Application.StartupPath + @"\Author_Books.dat"; //custom path
         private static string fileTemp = Application.StartupPath + @"\Temp.dat"; //custom path for temp dat, used for better updating (replacing)/deleting
 
-        public static void Register(Author_Book Author_Book)
+        public static int Register(Author_Book Author_Book)
         {
             //fix later to check for unique Author_BookIDs
 
             List<Author_Book> listS = new List<Author_Book>();
             listS = ListAuthor_Books();
-            bool dupe = false;
 
             foreach (Author_Book a in listS)
             {
                 if (a.AuthorID == Author_Book.AuthorID && a.ISBNFK == Author_Book.ISBNFK)
                 {
-                    MessageBox.Show("Duplicate IDs, please enter a unique combo.");
-                    dupe = true;
+                    MessageBox.Show("Unexpected behavior, Author ID already exists for this book.");
+                    return 0; //failed
                 }
             }
-
-            if (dupe == false)
-            {
                 ///check to see if exists - TBA
                 StreamWriter sWriter = new StreamWriter(filePath, true); //true used to append
                 sWriter.WriteLine(Author_Book.AuthorID + "," + Author_Book.ISBNFK);
                 sWriter.Close();
-                MessageBox.Show("Registration complete.");
-            }
+                return 1; //success
         }
         public static List<Author_Book> ListAuthor_Books()
         {

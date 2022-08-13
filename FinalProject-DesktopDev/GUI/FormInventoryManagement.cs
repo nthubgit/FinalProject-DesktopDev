@@ -39,18 +39,36 @@ namespace FinalProject_DesktopDev.GUI
         private void buttonAddBook_Click(object sender, EventArgs e)
         {
 
-            if (textBoxISBN.Text == "" || textBoxTitle.Text == "" || textBoxUnitPrice.Text == "" || textBoxYearPublished.Text == "" || textBoxQOH.Text == "")
+            if (textBoxISBN.Text == "" || textBoxTitle.Text == "" || textBoxUnitPrice.Text == "" || textBoxYearPublished.Text == "" || textBoxQOH.Text == "" || textBoxPublisherID.Text == "" || textBoxPublisherName.Text == "" || textBoxAuthorID.Text == "")
             {
                 MessageBox.Show("Fields have been left blank, please fill before continuing.", "Failed");
             }
             else
             {
+                //filling publisher
+                publisher.PublisherID = Convert.ToInt32(textBoxPublisherID.Text);
+                publisher.Name = textBoxPublisherName.Text;
+                publisher.ISBNFK = textBoxISBN.Text;
+                //filing author_book
+                author_book.AuthorID = Convert.ToInt32(textBoxAuthorID.Text);
+                author_book.ISBNFK = textBoxISBN.Text;
+                //filling book
                 book.ISBN = textBoxISBN.Text;
                 book.Title = textBoxTitle.Text;
                 book.UnitPrice = Convert.ToInt32(textBoxUnitPrice.Text);
                 book.YearPublished = Convert.ToInt32(textBoxYearPublished.Text);
                 book.QOH = Convert.ToInt32(textBoxQOH.Text);
-                BookDA.Register(book);
+                //trying register
+                int result = BookDA.Register(book, publisher, author_book);
+                if (result == 1)
+                {
+                    MessageBox.Show("Registration complete.");
+                }
+                else
+                {
+                    MessageBox.Show("Registration failed.");
+                }
+                
             }
         }
 
@@ -111,18 +129,30 @@ namespace FinalProject_DesktopDev.GUI
                     case 3: //YearPublished
                     case 4: //QOH
                         {
-                            books = BookDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
+                            int numericValue;
+                            bool isNumber = int.TryParse(textBoxSearch.Text, out numericValue);
 
-                            if (books != null)
-                            {
-                                var results = (from element in books
-                                               select element);
+                            if (isNumber == true) 
+                            { 
 
-                                dataGridViewResult.DataSource = results.ToList();
+                                books = BookDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
+
+                                if (books != null)
+                                {
+                                    var results = (from element in books
+                                                   select element);
+
+                                    dataGridViewResult.DataSource = results.ToList();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Book not found!", "Failed");
+                                }
+                                
                             }
                             else
                             {
-                                MessageBox.Show("Book not found!");
+                                MessageBox.Show("Query must be a number for this criteria!", "Failed");
                             }
                             break;
                         }
@@ -154,8 +184,23 @@ namespace FinalProject_DesktopDev.GUI
         private void buttonListAuthor_Click(object sender, EventArgs e)
         {
             authors = AuthorDA.ListAuthors();
-            var allPrograms = (from element in authors
-                               select element);
+
+            books = BookDA.ListBooks();
+            authors = AuthorDA.ListAuthors();
+            author_books = Author_BookDA.ListAuthor_Books();
+            publishers = PublisherDA.ListPublishers();
+
+            //var allPrograms = (from b in books
+            //                   join p in publishers on b.ISBN equals p.ISBNFK
+            //                   select new { ISBN = b.ISBN, Title = b.Title, PublisherName = p.Name, Price = b.UnitPrice, YearPublished = b.YearPublished, QOH = b.YearPublished });
+
+            var allPrograms = (from ab in author_books
+                        join a in authors on ab.AuthorID equals a.AuthorID
+                        join b in books on ab.ISBNFK equals b.ISBN
+                        select new { ISBN = b.ISBN, Title = b.Title, LastName = a.LastName, FirstName = a.FirstName });
+
+            //var allPrograms = (from element in authors
+            //                   select element);
 
             dataGridViewResult.DataSource = allPrograms.ToList();
         }
@@ -222,25 +267,25 @@ namespace FinalProject_DesktopDev.GUI
             }
         }
         //-------------------------------------------Publishers--------------------------------------------//
-        private void buttonAddPublisher_Click(object sender, EventArgs e)
-        {
-            if (textBoxPublisherID.Text == "" || textBoxPublisherName.Text == "" ||textBoxISBNFK.Text == "")
-            {
-                MessageBox.Show("Fields have been left blank, please fill before continuing.", "Failed");
-            }
-            else
-            {
-                publisher.PublisherID = Convert.ToInt32(textBoxPublisherID.Text);
-                publisher.Name = textBoxPublisherName.Text;
-                PublisherDA.Register(publisher);
-            }
-        }
+        //private void buttonAddPublisher_Click(object sender, EventArgs e)
+        //{
+        //    if (textBoxPublisherID.Text == "" || textBoxPublisherName.Text == "")
+        //    {
+        //        MessageBox.Show("Fields have been left blank, please fill before continuing.", "Failed");
+        //    }
+        //    else
+        //    {
+        //        publisher.PublisherID = Convert.ToInt32(textBoxPublisherID.Text);
+        //        publisher.Name = textBoxPublisherName.Text;
+        //        PublisherDA.Register(publisher);
+        //    }
+        //}
 
         private void buttonListPublisher_Click(object sender, EventArgs e)
         {
             publishers = PublisherDA.ListPublishers();
             var allPrograms = (from element in publishers
-                               select element);
+                               select element).Distinct();
 
             dataGridViewResult.DataSource = allPrograms.ToList();
         }
@@ -290,13 +335,14 @@ namespace FinalProject_DesktopDev.GUI
             }
         }
 
-        private void textBoxPublisherIDFK_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxBookAuthorID_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verify that the pressed key isn't CTRL or any non-numeric digit
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
+
         }
     }
 }

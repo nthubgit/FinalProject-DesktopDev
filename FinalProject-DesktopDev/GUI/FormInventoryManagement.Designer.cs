@@ -47,6 +47,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxYearPublished = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxPublisherName = new System.Windows.Forms.TextBox();
+            this.labelPublisherName = new System.Windows.Forms.Label();
+            this.textBoxPublisherID = new System.Windows.Forms.TextBox();
+            this.labelPublisherID = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
@@ -56,7 +60,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxSearch2 = new System.Windows.Forms.ComboBox();
             this.buttonSearch2 = new System.Windows.Forms.Button();
-            this.buttonExit = new System.Windows.Forms.Button();
             this.buttonList2 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -64,21 +67,15 @@
             this.textBoxFirstName = new System.Windows.Forms.TextBox();
             this.textBoxAuthorID = new System.Windows.Forms.TextBox();
             this.buttonAdd2 = new System.Windows.Forms.Button();
-            this.groupBoxPublisher = new System.Windows.Forms.GroupBox();
-            this.textBoxPublisherID = new System.Windows.Forms.TextBox();
-            this.labelPublisherID = new System.Windows.Forms.Label();
-            this.textBoxPublisherName = new System.Windows.Forms.TextBox();
-            this.labelPublisherName = new System.Windows.Forms.Label();
-            this.buttonAddPublisher = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
             this.buttonListPublisher = new System.Windows.Forms.Button();
-            this.textBoxISBNFK = new System.Windows.Forms.TextBox();
-            this.labelISBNFK = new System.Windows.Forms.Label();
+            this.textBoxBookAuthorID = new System.Windows.Forms.TextBox();
+            this.labelBookAuthorID = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBoxPublisher.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxUnitPrice
@@ -95,7 +92,7 @@
             this.groupBox1.Controls.Add(this.labelSearchBy);
             this.groupBox1.Controls.Add(this.comboBoxSearch);
             this.groupBox1.Controls.Add(this.buttonSearch);
-            this.groupBox1.Location = new System.Drawing.Point(15, 210);
+            this.groupBox1.Location = new System.Drawing.Point(6, 332);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(264, 106);
             this.groupBox1.TabIndex = 36;
@@ -145,11 +142,11 @@
             // 
             // buttonList
             // 
-            this.buttonList.Location = new System.Drawing.Point(178, 330);
+            this.buttonList.Location = new System.Drawing.Point(6, 491);
             this.buttonList.Name = "buttonList";
-            this.buttonList.Size = new System.Drawing.Size(75, 23);
+            this.buttonList.Size = new System.Drawing.Size(125, 23);
             this.buttonList.TabIndex = 32;
-            this.buttonList.Text = "&List";
+            this.buttonList.Text = "&List Books";
             this.buttonList.UseVisualStyleBackColor = true;
             this.buttonList.Click += new System.EventHandler(this.buttonListBook_Click);
             // 
@@ -207,11 +204,11 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(24, 330);
+            this.buttonAdd.Location = new System.Drawing.Point(79, 444);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.Size = new System.Drawing.Size(125, 23);
             this.buttonAdd.TabIndex = 31;
-            this.buttonAdd.Text = "&Add";
+            this.buttonAdd.Text = "&Add Book";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAddBook_Click);
             // 
@@ -253,13 +250,20 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBoxBookAuthorID);
+            this.groupBox2.Controls.Add(this.labelBookAuthorID);
+            this.groupBox2.Controls.Add(this.buttonListPublisher);
             this.groupBox2.Controls.Add(this.textBoxQOH);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.textBoxYearPublished);
+            this.groupBox2.Controls.Add(this.textBoxPublisherName);
             this.groupBox2.Controls.Add(this.textBoxUnitPrice);
+            this.groupBox2.Controls.Add(this.labelPublisherName);
             this.groupBox2.Controls.Add(this.groupBox1);
+            this.groupBox2.Controls.Add(this.textBoxPublisherID);
             this.groupBox2.Controls.Add(this.buttonList);
+            this.groupBox2.Controls.Add(this.labelPublisherID);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.labelLastName);
             this.groupBox2.Controls.Add(this.labelSBN);
@@ -268,10 +272,45 @@
             this.groupBox2.Controls.Add(this.buttonAdd);
             this.groupBox2.Location = new System.Drawing.Point(509, 18);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(285, 365);
+            this.groupBox2.Size = new System.Drawing.Size(285, 529);
             this.groupBox2.TabIndex = 41;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Book";
+            // 
+            // textBoxPublisherName
+            // 
+            this.textBoxPublisherName.Location = new System.Drawing.Point(125, 253);
+            this.textBoxPublisherName.Name = "textBoxPublisherName";
+            this.textBoxPublisherName.Size = new System.Drawing.Size(121, 20);
+            this.textBoxPublisherName.TabIndex = 45;
+            // 
+            // labelPublisherName
+            // 
+            this.labelPublisherName.AutoSize = true;
+            this.labelPublisherName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.labelPublisherName.Location = new System.Drawing.Point(27, 257);
+            this.labelPublisherName.Name = "labelPublisherName";
+            this.labelPublisherName.Size = new System.Drawing.Size(73, 13);
+            this.labelPublisherName.TabIndex = 46;
+            this.labelPublisherName.Text = "Pub. Name:";
+            // 
+            // textBoxPublisherID
+            // 
+            this.textBoxPublisherID.Location = new System.Drawing.Point(125, 214);
+            this.textBoxPublisherID.Name = "textBoxPublisherID";
+            this.textBoxPublisherID.Size = new System.Drawing.Size(121, 20);
+            this.textBoxPublisherID.TabIndex = 43;
+            this.textBoxPublisherID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPublisherID_KeyPress);
+            // 
+            // labelPublisherID
+            // 
+            this.labelPublisherID.AutoSize = true;
+            this.labelPublisherID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.labelPublisherID.Location = new System.Drawing.Point(27, 218);
+            this.labelPublisherID.Name = "labelPublisherID";
+            this.labelPublisherID.Size = new System.Drawing.Size(80, 13);
+            this.labelPublisherID.TabIndex = 44;
+            this.labelPublisherID.Text = "Publisher ID:";
             // 
             // groupBox3
             // 
@@ -370,21 +409,9 @@
             this.buttonSearch2.UseVisualStyleBackColor = true;
             this.buttonSearch2.Click += new System.EventHandler(this.buttonSearchAuthor_Click);
             // 
-            // buttonExit
-            // 
-            this.buttonExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonExit.ForeColor = System.Drawing.Color.Red;
-            this.buttonExit.Location = new System.Drawing.Point(1016, 624);
-            this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(75, 23);
-            this.buttonExit.TabIndex = 34;
-            this.buttonExit.Text = "&Back";
-            this.buttonExit.UseVisualStyleBackColor = true;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
             // buttonList2
             // 
-            this.buttonList2.Location = new System.Drawing.Point(171, 332);
+            this.buttonList2.Location = new System.Drawing.Point(204, 332);
             this.buttonList2.Name = "buttonList2";
             this.buttonList2.Size = new System.Drawing.Size(75, 23);
             this.buttonList2.TabIndex = 32;
@@ -447,102 +474,52 @@
             this.buttonAdd2.UseVisualStyleBackColor = true;
             this.buttonAdd2.Click += new System.EventHandler(this.buttonAddAuthor_Click);
             // 
-            // groupBoxPublisher
+            // buttonExit
             // 
-            this.groupBoxPublisher.Controls.Add(this.textBoxISBNFK);
-            this.groupBoxPublisher.Controls.Add(this.labelISBNFK);
-            this.groupBoxPublisher.Controls.Add(this.buttonListPublisher);
-            this.groupBoxPublisher.Controls.Add(this.buttonAddPublisher);
-            this.groupBoxPublisher.Controls.Add(this.textBoxPublisherName);
-            this.groupBoxPublisher.Controls.Add(this.labelPublisherName);
-            this.groupBoxPublisher.Controls.Add(this.textBoxPublisherID);
-            this.groupBoxPublisher.Controls.Add(this.labelPublisherID);
-            this.groupBoxPublisher.Location = new System.Drawing.Point(511, 438);
-            this.groupBoxPublisher.Name = "groupBoxPublisher";
-            this.groupBoxPublisher.Size = new System.Drawing.Size(282, 208);
-            this.groupBoxPublisher.TabIndex = 43;
-            this.groupBoxPublisher.TabStop = false;
-            this.groupBoxPublisher.Text = "Publisher";
-            // 
-            // textBoxPublisherID
-            // 
-            this.textBoxPublisherID.Location = new System.Drawing.Point(123, 25);
-            this.textBoxPublisherID.Name = "textBoxPublisherID";
-            this.textBoxPublisherID.Size = new System.Drawing.Size(121, 20);
-            this.textBoxPublisherID.TabIndex = 43;
-            this.textBoxPublisherID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPublisherID_KeyPress);
-            // 
-            // labelPublisherID
-            // 
-            this.labelPublisherID.AutoSize = true;
-            this.labelPublisherID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.labelPublisherID.Location = new System.Drawing.Point(25, 29);
-            this.labelPublisherID.Name = "labelPublisherID";
-            this.labelPublisherID.Size = new System.Drawing.Size(80, 13);
-            this.labelPublisherID.TabIndex = 44;
-            this.labelPublisherID.Text = "Publisher ID:";
-            // 
-            // textBoxPublisherName
-            // 
-            this.textBoxPublisherName.Location = new System.Drawing.Point(123, 68);
-            this.textBoxPublisherName.Name = "textBoxPublisherName";
-            this.textBoxPublisherName.Size = new System.Drawing.Size(121, 20);
-            this.textBoxPublisherName.TabIndex = 45;
-            // 
-            // labelPublisherName
-            // 
-            this.labelPublisherName.AutoSize = true;
-            this.labelPublisherName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.labelPublisherName.Location = new System.Drawing.Point(25, 72);
-            this.labelPublisherName.Name = "labelPublisherName";
-            this.labelPublisherName.Size = new System.Drawing.Size(43, 13);
-            this.labelPublisherName.TabIndex = 46;
-            this.labelPublisherName.Text = "Name:";
-            // 
-            // buttonAddPublisher
-            // 
-            this.buttonAddPublisher.Location = new System.Drawing.Point(22, 161);
-            this.buttonAddPublisher.Name = "buttonAddPublisher";
-            this.buttonAddPublisher.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddPublisher.TabIndex = 43;
-            this.buttonAddPublisher.Text = "&Add";
-            this.buttonAddPublisher.UseVisualStyleBackColor = true;
-            this.buttonAddPublisher.Click += new System.EventHandler(this.buttonAddPublisher_Click);
+            this.buttonExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonExit.ForeColor = System.Drawing.Color.Red;
+            this.buttonExit.Location = new System.Drawing.Point(1023, 509);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(75, 23);
+            this.buttonExit.TabIndex = 34;
+            this.buttonExit.Text = "&Back";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // buttonListPublisher
             // 
-            this.buttonListPublisher.Location = new System.Drawing.Point(176, 161);
+            this.buttonListPublisher.Location = new System.Drawing.Point(154, 491);
             this.buttonListPublisher.Name = "buttonListPublisher";
-            this.buttonListPublisher.Size = new System.Drawing.Size(75, 23);
+            this.buttonListPublisher.Size = new System.Drawing.Size(125, 23);
             this.buttonListPublisher.TabIndex = 43;
-            this.buttonListPublisher.Text = "&List";
+            this.buttonListPublisher.Text = "List &Publishers";
             this.buttonListPublisher.UseVisualStyleBackColor = true;
             this.buttonListPublisher.Click += new System.EventHandler(this.buttonListPublisher_Click);
             // 
-            // textBoxISBNFK
+            // textBoxBookAuthorID
             // 
-            this.textBoxISBNFK.Location = new System.Drawing.Point(123, 112);
-            this.textBoxISBNFK.Name = "textBoxISBNFK";
-            this.textBoxISBNFK.Size = new System.Drawing.Size(121, 20);
-            this.textBoxISBNFK.TabIndex = 47;
+            this.textBoxBookAuthorID.Location = new System.Drawing.Point(125, 292);
+            this.textBoxBookAuthorID.Name = "textBoxBookAuthorID";
+            this.textBoxBookAuthorID.Size = new System.Drawing.Size(121, 20);
+            this.textBoxBookAuthorID.TabIndex = 49;
+            this.textBoxBookAuthorID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBookAuthorID_KeyPress);
             // 
-            // labelISBNFK
+            // labelBookAuthorID
             // 
-            this.labelISBNFK.AutoSize = true;
-            this.labelISBNFK.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.labelISBNFK.Location = new System.Drawing.Point(25, 116);
-            this.labelISBNFK.Name = "labelISBNFK";
-            this.labelISBNFK.Size = new System.Drawing.Size(67, 13);
-            this.labelISBNFK.TabIndex = 48;
-            this.labelISBNFK.Text = "ISBN (FK):";
+            this.labelBookAuthorID.AutoSize = true;
+            this.labelBookAuthorID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.labelBookAuthorID.Location = new System.Drawing.Point(27, 296);
+            this.labelBookAuthorID.Name = "labelBookAuthorID";
+            this.labelBookAuthorID.Size = new System.Drawing.Size(65, 13);
+            this.labelBookAuthorID.TabIndex = 50;
+            this.labelBookAuthorID.Text = "Author ID:";
             // 
             // FormInventoryManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonExit;
-            this.ClientSize = new System.Drawing.Size(1116, 659);
-            this.Controls.Add(this.groupBoxPublisher);
+            this.ClientSize = new System.Drawing.Size(1116, 562);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -559,8 +536,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBoxPublisher.ResumeLayout(false);
-            this.groupBoxPublisher.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -603,14 +578,12 @@
         private System.Windows.Forms.TextBox textBoxFirstName;
         private System.Windows.Forms.TextBox textBoxAuthorID;
         private System.Windows.Forms.Button buttonAdd2;
-        private System.Windows.Forms.GroupBox groupBoxPublisher;
         private System.Windows.Forms.Button buttonListPublisher;
-        private System.Windows.Forms.Button buttonAddPublisher;
         private System.Windows.Forms.TextBox textBoxPublisherName;
         private System.Windows.Forms.Label labelPublisherName;
         private System.Windows.Forms.TextBox textBoxPublisherID;
         private System.Windows.Forms.Label labelPublisherID;
-        private System.Windows.Forms.TextBox textBoxISBNFK;
-        private System.Windows.Forms.Label labelISBNFK;
+        private System.Windows.Forms.TextBox textBoxBookAuthorID;
+        private System.Windows.Forms.Label labelBookAuthorID;
     }
 }

@@ -30,7 +30,6 @@ namespace FinalProject_DesktopDev.Data_Access
                     dupe = true;
                 }
             }
-
             if (dupe == false)
             {
                 //Find client based on Client Name, and subtract the cost of the order from their credit limit
@@ -61,7 +60,7 @@ namespace FinalProject_DesktopDev.Data_Access
                 string[] fields = line.Split(',');
                 switch (choice)
                 {
-                    case 0: //BookTitle
+                    case 0: //OrderID
                         {
                             if (num == Convert.ToInt32(fields[0]))
                             {
@@ -138,7 +137,7 @@ namespace FinalProject_DesktopDev.Data_Access
 
                 switch (choice)
                 {
-                    case 1:
+                    case 1: //ClientName
                         {
                             if (text == fields[1])
                             {
@@ -153,7 +152,7 @@ namespace FinalProject_DesktopDev.Data_Access
                             line = sReader.ReadLine();
                             break;
                         }
-                    case 2:
+                    case 2: //BookTitle
                         {
                             if (text == fields[2])
                             {
