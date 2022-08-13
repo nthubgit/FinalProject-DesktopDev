@@ -213,7 +213,7 @@ namespace FinalProject_DesktopDev.Data_Access
 
                 if (BookTitle == fields[1])
                 {
-                    oldQOH = Convert.ToInt32(fields[6]);
+                    oldQOH = Convert.ToInt32(fields[4]);
                     book.ISBN = fields[0];
                     book.Title = fields[1];
                     book.UnitPrice = (Convert.ToInt32(fields[2]));
@@ -247,6 +247,54 @@ namespace FinalProject_DesktopDev.Data_Access
             File.Move(fileTemp, filePath);
             MessageBox.Show("Transaction complete!" + "\n" +
                 book.Title + " QOH: " + oldQOH + "=>" + book.QOH);
+        }
+        public static void ReverseTransaction(string BookTitle, int Quantity) //Finds the book based on BookTitle, then updates DB
+        {
+            StreamReader sReader = new StreamReader(filePath);
+            string line = sReader.ReadLine();
+            Book book = new Book();
+            int oldQOH = 0;
+            //Search
+            while (line != null)
+            {
+                string[] fields = line.Split(',');
+
+                if (BookTitle == fields[1])
+                {
+                    oldQOH = Convert.ToInt32(fields[4]);
+                    book.ISBN = fields[0];
+                    book.Title = fields[1];
+                    book.UnitPrice = (Convert.ToInt32(fields[2]));
+                    book.YearPublished = (Convert.ToInt32(fields[3]));
+                    book.QOH = (Convert.ToInt32(fields[4]) + Quantity);
+                    break;
+                }
+                line = sReader.ReadLine();
+            }
+            sReader.Close();
+            //Update
+
+            StreamWriter sWriter = new StreamWriter(fileTemp, true);
+            StreamReader sReader2 = new StreamReader(filePath);
+            String line2 = sReader2.ReadLine();
+
+            while (line2 != null)
+            {
+                string[] fields = line2.Split(',');
+                if (fields[0] != book.ISBN) //unique
+                {
+                    sWriter.WriteLine(fields[0] + "," + fields[1] + "," + fields[2] + "," + fields[3] + "," + fields[4]);
+                }
+
+                line2 = sReader2.ReadLine();
+            }
+            sWriter.WriteLine(book.ISBN + "," + book.Title + "," + book.UnitPrice + "," + book.YearPublished + "," + book.QOH);
+            sReader2.Close();
+            sWriter.Close();
+            File.Delete(filePath);
+            File.Move(fileTemp, filePath);
+            MessageBox.Show("Reverse transaction complete!" + "\n" +
+                book.Title + "'s QOH: " + oldQOH + "=>" + book.QOH);
         }
     }
 }

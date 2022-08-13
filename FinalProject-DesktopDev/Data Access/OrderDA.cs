@@ -206,9 +206,11 @@ namespace FinalProject_DesktopDev.Data_Access
 
         public static void Delete(int clientID)
         {
+            Order order = new Order();
             StreamReader sReader = new StreamReader(filePath);
             string line = sReader.ReadLine();
             StreamWriter sWriter = new StreamWriter(fileTemp, true);
+            bool found = false;
             while (line != null)
             {
                 string[] fields = line.Split(',');
@@ -219,13 +221,32 @@ namespace FinalProject_DesktopDev.Data_Access
 
 
                 }
+                else
+                {
+                    found = true;
+                    order.ClientName = fields[1];
+                    order.BookTitle = fields[2];
+                    order.Quantity = Convert.ToInt32(fields[3]);
+                    order.TotalPrice = Convert.ToInt32(fields[4]);
+                }
                 line = sReader.ReadLine(); // Attention : read the next line 
             }
             sReader.Close();
             sWriter.Close();
 
-            File.Delete(filePath);
-            File.Move(fileTemp, filePath);
+            if (found)
+            {
+                File.Delete(filePath);
+                File.Move(fileTemp, filePath);
+                ClientDA.ReverseTransaction(order.ClientName, order.TotalPrice);
+                BookDA.ReverseTransaction(order.BookTitle, order.Quantity);
+
+                MessageBox.Show("Deletion complete. QOH and Credit reverted.", "Success");
+            }
+            else
+            {
+                MessageBox.Show("No such ID found.", "Failed");
+            }
 
         }
 

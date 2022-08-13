@@ -255,6 +255,7 @@
             this.textBoxCreditLimit.Name = "textBoxCreditLimit";
             this.textBoxCreditLimit.Size = new System.Drawing.Size(121, 20);
             this.textBoxCreditLimit.TabIndex = 44;
+            this.textBoxCreditLimit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCreditLimit_KeyPress);
             // 
             // maskedTextBoxPhoneNumber
             // 
@@ -263,6 +264,7 @@
             this.maskedTextBoxPhoneNumber.Name = "maskedTextBoxPhoneNumber";
             this.maskedTextBoxPhoneNumber.Size = new System.Drawing.Size(120, 20);
             this.maskedTextBoxPhoneNumber.TabIndex = 46;
+            this.maskedTextBoxPhoneNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.maskedTextBoxPhoneNumber_KeyPress);
             // 
             // maskedTextBoxFaxNumber
             // 
@@ -271,6 +273,7 @@
             this.maskedTextBoxFaxNumber.Name = "maskedTextBoxFaxNumber";
             this.maskedTextBoxFaxNumber.Size = new System.Drawing.Size(120, 20);
             this.maskedTextBoxFaxNumber.TabIndex = 47;
+            this.maskedTextBoxFaxNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.maskedTextBoxFaxNumber_KeyPress);
             // 
             // FormClientManagement
             // 

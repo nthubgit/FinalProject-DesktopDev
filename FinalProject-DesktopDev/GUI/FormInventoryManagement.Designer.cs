@@ -77,6 +77,7 @@
             this.textBoxUnitPrice.Name = "textBoxUnitPrice";
             this.textBoxUnitPrice.Size = new System.Drawing.Size(121, 20);
             this.textBoxUnitPrice.TabIndex = 2;
+            this.textBoxUnitPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxUnitPrice_KeyPress);
             // 
             // groupBox1
             // 
@@ -210,6 +211,7 @@
             this.textBoxQOH.Name = "textBoxQOH";
             this.textBoxQOH.Size = new System.Drawing.Size(121, 20);
             this.textBoxQOH.TabIndex = 4;
+            this.textBoxQOH.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxQOH_KeyPress);
             // 
             // label1
             // 
@@ -237,6 +239,7 @@
             this.textBoxYearPublished.Name = "textBoxYearPublished";
             this.textBoxYearPublished.Size = new System.Drawing.Size(121, 20);
             this.textBoxYearPublished.TabIndex = 3;
+            this.textBoxYearPublished.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxYearPublished_KeyPress);
             // 
             // groupBox2
             // 
@@ -423,6 +426,7 @@
             this.textBoxAuthorID.Name = "textBoxAuthorID";
             this.textBoxAuthorID.Size = new System.Drawing.Size(121, 20);
             this.textBoxAuthorID.TabIndex = 0;
+            this.textBoxAuthorID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAuthorID_KeyPress);
             // 
             // buttonAdd2
             // 

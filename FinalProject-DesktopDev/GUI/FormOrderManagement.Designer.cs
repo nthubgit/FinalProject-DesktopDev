@@ -43,7 +43,7 @@
             this.textBoxQuery = new System.Windows.Forms.TextBox();
             this.dataGridViewResult = new System.Windows.Forms.DataGridView();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxFindClient = new System.Windows.Forms.GroupBox();
             this.buttonFindClient = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.groupBoxFindClient.SuspendLayout();
             this.groupBoxOrderDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +69,7 @@
             this.groupBox1.Controls.Add(this.buttonSearch);
             this.groupBox1.Location = new System.Drawing.Point(529, 382);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(261, 106);
+            this.groupBox1.Size = new System.Drawing.Size(432, 106);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             // 
@@ -77,7 +77,7 @@
             // 
             this.textBoxSearch.Location = new System.Drawing.Point(22, 55);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(121, 20);
+            this.textBoxSearch.Size = new System.Drawing.Size(304, 20);
             this.textBoxSearch.TabIndex = 4;
             // 
             // labelSearchBy
@@ -92,7 +92,7 @@
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(163, 55);
+            this.buttonSearch.Location = new System.Drawing.Point(332, 55);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(75, 23);
             this.buttonSearch.TabIndex = 5;
@@ -106,14 +106,15 @@
             this.comboBoxBook.FormattingEnabled = true;
             this.comboBoxBook.Location = new System.Drawing.Point(115, 77);
             this.comboBoxBook.Name = "comboBoxBook";
-            this.comboBoxBook.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxBook.Size = new System.Drawing.Size(292, 21);
             this.comboBoxBook.TabIndex = 3;
+            this.comboBoxBook.SelectedIndexChanged += new System.EventHandler(this.comboBoxBook_SelectedIndexChanged);
             // 
             // buttonBack
             // 
             this.buttonBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonBack.ForeColor = System.Drawing.Color.Red;
-            this.buttonBack.Location = new System.Drawing.Point(715, 501);
+            this.buttonBack.Location = new System.Drawing.Point(885, 501);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 23;
@@ -169,7 +170,7 @@
             "Fax"});
             this.comboBoxOrderMethod.Location = new System.Drawing.Point(115, 19);
             this.comboBoxOrderMethod.Name = "comboBoxOrderMethod";
-            this.comboBoxOrderMethod.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxOrderMethod.Size = new System.Drawing.Size(292, 21);
             this.comboBoxOrderMethod.TabIndex = 17;
             // 
             // textBoxClientName
@@ -177,14 +178,14 @@
             this.textBoxClientName.Enabled = false;
             this.textBoxClientName.Location = new System.Drawing.Point(115, 53);
             this.textBoxClientName.Name = "textBoxClientName";
-            this.textBoxClientName.Size = new System.Drawing.Size(121, 20);
+            this.textBoxClientName.Size = new System.Drawing.Size(292, 20);
             this.textBoxClientName.TabIndex = 16;
             // 
             // textBoxQuery
             // 
             this.textBoxQuery.Location = new System.Drawing.Point(115, 56);
             this.textBoxQuery.Name = "textBoxQuery";
-            this.textBoxQuery.Size = new System.Drawing.Size(121, 20);
+            this.textBoxQuery.Size = new System.Drawing.Size(292, 20);
             this.textBoxQuery.TabIndex = 15;
             // 
             // dataGridViewResult
@@ -205,25 +206,25 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // groupBox2
+            // groupBoxFindClient
             // 
-            this.groupBox2.Controls.Add(this.buttonFindClient);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.labelUsername);
-            this.groupBox2.Controls.Add(this.comboBoxOrderMethod);
-            this.groupBox2.Controls.Add(this.textBoxQuery);
-            this.groupBox2.Location = new System.Drawing.Point(529, 30);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(261, 121);
-            this.groupBox2.TabIndex = 26;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Find Client";
+            this.groupBoxFindClient.Controls.Add(this.buttonFindClient);
+            this.groupBoxFindClient.Controls.Add(this.label3);
+            this.groupBoxFindClient.Controls.Add(this.labelUsername);
+            this.groupBoxFindClient.Controls.Add(this.comboBoxOrderMethod);
+            this.groupBoxFindClient.Controls.Add(this.textBoxQuery);
+            this.groupBoxFindClient.Location = new System.Drawing.Point(529, 30);
+            this.groupBoxFindClient.Name = "groupBoxFindClient";
+            this.groupBoxFindClient.Size = new System.Drawing.Size(432, 121);
+            this.groupBoxFindClient.TabIndex = 26;
+            this.groupBoxFindClient.TabStop = false;
+            this.groupBoxFindClient.Text = "Find Client";
             // 
             // buttonFindClient
             // 
-            this.buttonFindClient.Location = new System.Drawing.Point(80, 92);
+            this.buttonFindClient.Location = new System.Drawing.Point(140, 82);
             this.buttonFindClient.Name = "buttonFindClient";
-            this.buttonFindClient.Size = new System.Drawing.Size(90, 23);
+            this.buttonFindClient.Size = new System.Drawing.Size(150, 23);
             this.buttonFindClient.TabIndex = 36;
             this.buttonFindClient.Text = "&Find Client";
             this.buttonFindClient.UseVisualStyleBackColor = true;
@@ -254,7 +255,7 @@
             this.textBoxPrice.Enabled = false;
             this.textBoxPrice.Location = new System.Drawing.Point(115, 104);
             this.textBoxPrice.Name = "textBoxPrice";
-            this.textBoxPrice.Size = new System.Drawing.Size(121, 20);
+            this.textBoxPrice.Size = new System.Drawing.Size(292, 20);
             this.textBoxPrice.TabIndex = 29;
             // 
             // labelQuantity
@@ -271,8 +272,10 @@
             // 
             this.textBoxQuantity.Location = new System.Drawing.Point(115, 129);
             this.textBoxQuantity.Name = "textBoxQuantity";
-            this.textBoxQuantity.Size = new System.Drawing.Size(121, 20);
+            this.textBoxQuantity.Size = new System.Drawing.Size(292, 20);
             this.textBoxQuantity.TabIndex = 31;
+            this.textBoxQuantity.TextChanged += new System.EventHandler(this.textBoxQuantity_TextChanged);
+            this.textBoxQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxQuantity_KeyPress);
             // 
             // groupBoxOrderDetails
             // 
@@ -290,19 +293,20 @@
             this.groupBoxOrderDetails.Controls.Add(this.textBoxClientName);
             this.groupBoxOrderDetails.Location = new System.Drawing.Point(529, 157);
             this.groupBoxOrderDetails.Name = "groupBoxOrderDetails";
-            this.groupBoxOrderDetails.Size = new System.Drawing.Size(260, 219);
+            this.groupBoxOrderDetails.Size = new System.Drawing.Size(431, 219);
             this.groupBoxOrderDetails.TabIndex = 33;
             this.groupBoxOrderDetails.TabStop = false;
             this.groupBoxOrderDetails.Text = "Order Details";
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(146, 170);
+            this.buttonCancel.Location = new System.Drawing.Point(317, 170);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(90, 23);
             this.buttonCancel.TabIndex = 35;
             this.buttonCancel.Text = "&Cancel Order";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // labelOrderID
             // 
@@ -318,7 +322,7 @@
             // 
             this.textBoxOrderID.Location = new System.Drawing.Point(115, 27);
             this.textBoxOrderID.Name = "textBoxOrderID";
-            this.textBoxOrderID.Size = new System.Drawing.Size(121, 20);
+            this.textBoxOrderID.Size = new System.Drawing.Size(292, 20);
             this.textBoxOrderID.TabIndex = 33;
             this.textBoxOrderID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxOrderID_KeyPress);
             // 
@@ -334,16 +338,16 @@
             "Quantity"});
             this.comboBoxSearch.Location = new System.Drawing.Point(117, 22);
             this.comboBoxSearch.Name = "comboBoxSearch";
-            this.comboBoxSearch.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSearch.Size = new System.Drawing.Size(292, 21);
             this.comboBoxSearch.TabIndex = 36;
             // 
             // FormOrderManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(820, 552);
+            this.ClientSize = new System.Drawing.Size(973, 552);
             this.Controls.Add(this.groupBoxOrderDetails);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBoxFindClient);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonList);
@@ -355,8 +359,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBoxFindClient.ResumeLayout(false);
+            this.groupBoxFindClient.PerformLayout();
             this.groupBoxOrderDetails.ResumeLayout(false);
             this.groupBoxOrderDetails.PerformLayout();
             this.ResumeLayout(false);
@@ -380,7 +384,7 @@
         private System.Windows.Forms.TextBox textBoxQuery;
         private System.Windows.Forms.DataGridView dataGridViewResult;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxFindClient;
         private System.Windows.Forms.Button buttonFindClient;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
