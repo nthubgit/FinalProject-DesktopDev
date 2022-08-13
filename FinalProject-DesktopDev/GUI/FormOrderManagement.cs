@@ -112,16 +112,92 @@ namespace FinalProject_DesktopDev.GUI
 
         private void buttonList_Click(object sender, EventArgs e)
         {
+            orders = OrderDA.ListOrders();
+            var allPrograms = (from element in orders
+                               select element);
 
+            dataGridViewResult.DataSource = allPrograms.ToList();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
 
+            if (textBoxOrderID.Text == "" || textBoxClientName.Text == "" || comboBoxBook.Text == "" || textBoxPrice.Text == "" || textBoxQuantity.Text == "")
+            {
+                MessageBox.Show("Fields have been left blank, please fill before continuing.", "Failed");
+            }
+            else
+            {
+                order.OrderID = Convert.ToInt32(textBoxOrderID.Text);
+                order.ClientName = textBoxClientName.Text;
+                order.BookTitle = comboBoxBook.Text;
+                order.Quantity = Convert.ToInt32(textBoxPrice.Text);
+                order.TotalPrice = Convert.ToInt32(textBoxQuantity.Text);
+                OrderDA.Register(order);
+            }
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            int choice = comboBoxSearch.SelectedIndex;
+            if (textBoxSearch.Text == "")
+            {
+                MessageBox.Show("Missing query.", "Failed");
+
+            }
+            else
+            {
+                switch (choice)
+                {
+                    case -1: // IF the Book NOT select any search option
+
+                        MessageBox.Show("Please select at least one Search Option");
+                        break;
+
+                    case 0: //ISBN
+                    case 1: //Title
+                        {
+                            books = BookDA.Search(textBoxSearch.Text, choice);
+
+                            if (books != null)
+                            {
+                                var results = (from element in books
+                                               select element);
+
+                                dataGridViewResult.DataSource = results.ToList();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Book not found!");
+                            }
+                            break;
+                        }
+
+                    case 2: //UnitPrice
+                    case 3: //YearPublished
+                    case 4: //QOH
+                        {
+                            books = BookDA.Search(Convert.ToInt32(textBoxSearch.Text), choice);
+
+                            if (books != null)
+                            {
+                                var results = (from element in books
+                                               select element);
+
+                                dataGridViewResult.DataSource = results.ToList();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Book not found!");
+                            }
+                            break;
+                        }
+
+
+                    default:   // IF the Book NOT select an option on the  search combo box
+                        break;
+                }
+            }
 
         }
 

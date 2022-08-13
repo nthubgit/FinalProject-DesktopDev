@@ -54,6 +54,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelOrderID = new System.Windows.Forms.Label();
             this.textBoxOrderID = new System.Windows.Forms.TextBox();
+            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -62,6 +63,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBoxSearch);
             this.groupBox1.Controls.Add(this.textBoxSearch);
             this.groupBox1.Controls.Add(this.labelSearchBy);
             this.groupBox1.Controls.Add(this.buttonSearch);
@@ -320,6 +322,21 @@
             this.textBoxOrderID.TabIndex = 33;
             this.textBoxOrderID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxOrderID_KeyPress);
             // 
+            // comboBoxSearch
+            // 
+            this.comboBoxSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSearch.FormattingEnabled = true;
+            this.comboBoxSearch.Items.AddRange(new object[] {
+            "Order ID",
+            "Client",
+            "Book",
+            "Price",
+            "Quantity"});
+            this.comboBoxSearch.Location = new System.Drawing.Point(117, 22);
+            this.comboBoxSearch.Name = "comboBoxSearch";
+            this.comboBoxSearch.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSearch.TabIndex = 36;
+            // 
             // FormOrderManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -374,5 +391,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelOrderID;
         private System.Windows.Forms.TextBox textBoxOrderID;
+        private System.Windows.Forms.ComboBox comboBoxSearch;
     }
 }
