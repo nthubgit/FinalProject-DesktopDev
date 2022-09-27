@@ -22,14 +22,14 @@ Each college/university should contain the information such as name, street, cit
 
 Users and Operations
 
-Users
-Operations
-MIS Manager (Henry Brown)
-    • Add user information
-    • Search/List user information
-    • Add employee information
-    • Search/list employee information
-Sales Manager (Thomas Moore)
+    Users
+    Operations
+    MIS Manager (Henry Brown)
+        • Add user information
+        • Search/List user information
+        • Add employee information
+        • Search/list employee information
+    Sales Manager (Thomas Moore)
     • Add client information
     • Search/List client information
 Inventory Controller
